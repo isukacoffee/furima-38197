@@ -5,13 +5,74 @@
 | Column             | Type   | Options     |
 | ------------------ | ------ | ----------- |
 | nickname           | string | null: false |
-| email              | string | null: false, add_index :users, [:email], unique: true |
+| email              | string | null: false, unique: true |
 | encrypted_password | string | null: false |
-| Identification     | string | null: false |
-| date of birth      | string | null: false |
+| first_name         | string | null: false |
+| last_name          | string | null: false |
+| first_name(フリガナ) | string | null: false |
+| last_name(フリガナ)  | string | null: false |
+| date               | string | null: false |
 
 ### Association
 
 - has_many : items
 - has_many : purchase records
-- has_one  : shippings
+- has_one  : shipping
+
+## items テーブル
+
+| Column     | Type        | Options                                           |
+| ---------- | ----------  | ------------------------------------------------- |
+| item_image | text        | null: false                                       |
+| item_lists | text        | null: false                                       |
+| item_explanation  | text | null: false                                       |
+| item_detail       | text | null: false                                       |
+| item_situation    | text | null: false                                       |
+| item_category     | text | null: false                                       |
+| user         | references| null: false, foreign_key: true                    |
+
+### Association
+
+- belongs_to : user
+- has_one :  purchase record
+- belongs_to : shipping
+
+
+## purchase records テーブル
+
+| Column       | Type       | Options                        |
+| ------------ | ---------- | ------------------------------ |
+| user         | references | null: false, foreign_key: true |
+| item         | references | null: false, foreign_key: true |
+| item_list    | references | null: false, foreign_key: true |
+
+### Association
+
+- belongs_to : user
+- belongs_to : item
+- belongs_to : shipping
+
+
+
+## shippings テーブル
+
+| Column          | Type       | Options                        |
+| ------------    | ---------- | ------------------------------ |
+| user            | references | null: false, foreign_key: true |
+| post_code       | string     | null: false |
+| prefecture      | string     | null: false |
+| municipalities  | string     | null: false |
+| address         | string     | null: false |
+| building        | string     | null: false |
+| phone_number    | string     | null: false |
+| shipping_charge | string     | null: false |
+| region_of_origin| string     | null: false |
+| days_to_ship    | string     | null: false |
+| selling_price   | string     | null: false |
+
+
+### Association
+
+- belongs_to : user
+- has_many : items
+- has_one :  purchase record

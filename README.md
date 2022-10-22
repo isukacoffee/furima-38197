@@ -15,27 +15,30 @@
 
 ### Association
 
-- has_many : items
-- has_many : purchase records
-- has_one  : shipping
+- has_many :items
+- has_many :purchase_records
+- has_one  :shipping
 
 ## items テーブル
 
-| Column     | Type        | Options                                           |
-| ---------- | ----------  | ------------------------------------------------- |
-| item_image | text        | null: false                                       |
-| item_lists | text        | null: false                                       |
-| item_explanation  | text | null: false                                       |
-| item_detail       | text | null: false                                       |
-| item_situation    | text | null: false                                       |
-| item_category     | text | null: false                                       |
-| user         | references| null: false, foreign_key: true                    |
+| Column          | Type        | Options                                           |
+| ----------      | ----------  | ------------------------------------------------- |
+| lists_id        | integer     | null: false                                       |
+| explanation_id  | integer     | null: false                                       |
+| detail_id       | integer     | null: false                                       |
+| situation_id    | integer     | null: false                                       |
+| category_id     | integer     | null: false                                       |
+| shipping_charge | string     | null: false |
+| region_of_origin| string     | null: false |
+| days_to_ship    | string     | null: false |
+| selling_price   | string     | null: false |
+| user            | references| null: false, foreign_key: true                    |
 
 ### Association
 
-- belongs_to : user
-- has_one :  purchase record
-- belongs_to : shipping
+- belongs_to :user
+- has_one :purchase_record
+- belongs_to :shipping
 
 
 ## purchase records テーブル
@@ -44,14 +47,10 @@
 | ------------ | ---------- | ------------------------------ |
 | user         | references | null: false, foreign_key: true |
 | item         | references | null: false, foreign_key: true |
-| item_list    | references | null: false, foreign_key: true |
 
 ### Association
 
-- belongs_to : user
-- belongs_to : item
-- belongs_to : shipping
-
+- has_one :shipping
 
 
 ## shippings テーブル
@@ -65,14 +64,8 @@
 | address         | string     | null: false |
 | building        | string     | null: false |
 | phone_number    | string     | null: false |
-| shipping_charge | string     | null: false |
-| region_of_origin| string     | null: false |
-| days_to_ship    | string     | null: false |
-| selling_price   | string     | null: false |
 
 
 ### Association
 
-- belongs_to : user
-- has_many : items
-- has_one :  purchase record
+- belongs_to :purchase_record

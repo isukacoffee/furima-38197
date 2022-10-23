@@ -9,9 +9,9 @@
 | encrypted_password | string | null: false |
 | first_name         | string | null: false |
 | last_name          | string | null: false |
-| first_name(フリガナ) | string | null: false |
-| last_name(フリガナ)  | string | null: false |
-| date               | date | null: false |
+| first_name         | string | null: false |
+| last_name          | string | null: false |
+| birthday           | date | null: false |
 
 ### Association
 
@@ -27,16 +27,19 @@
 | detail_id       | integer     | null: false                                       |
 | situation_id    | integer     | null: false                                       |
 | category_id     | integer     | null: false                                       |
-
+| user            | references | null: false, foreign_key: true |
+|shipping_charge  | string     | null: false |
+|region of origin | string     | null: false |
+|days_to_ship     | string     | null: false |
+|selling_price    | string     | null: false |
 
 ### Association
 
 - belongs_to :user
 - has_one :purchase_record
-- belongs_to :shipping
 
 
-## purchase records テーブル
+## purchase_records テーブル
 
 | Column       | Type       | Options                        |
 | ------------ | ---------- | ------------------------------ |
@@ -55,9 +58,10 @@
 | Column          | Type       | Options                        |
 | ------------    | ---------- | ------------------------------ |
 | item            | references | null: false, foreign_key: true |
+| user            | references | null: false, foreign_key: true |
 | post_code       | string     | null: false |
 | prefecture_id   | integer    | null: false |
-| municipalities  | string     | null: false |
+| municipalitie   | string     | null: false |
 | address         | string     | null: false |
 | building        | string     
 | phone_number    | string     | null: false |

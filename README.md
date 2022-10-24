@@ -22,9 +22,9 @@
 
 | Column              | Type        | Options                        |
 | ----------          |  ---------- | -------------------------------|
-| lists_id            | integer     | null: false                    |
-| explanation_id      | integer     | null: false                    |
-| detail_id           | text        | null: false                    |
+| lists               | string      | null: false                    |
+| explanation         | text        | null: false                    |
+| detail              | text        | null: false                    |
 | category_id         | integer     | null: false                    |
 | user                | references  | null: false, foreign_key: true |
 | shipping_charge_id  | integer     | null: false                    |

@@ -9,6 +9,7 @@ development:
   password:
   host: localhost
   database: furima_38197_development
+
 test:
   <<: *default
   adapter: mysql2

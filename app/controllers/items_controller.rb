@@ -1,13 +1,27 @@
 class ItemsController < ApplicationController
+  before_action :authenticate_user!, except: [:index]
+  
   def index
-    #  @items = Item.all
+  #  @items = Item.all
   end
 
   def new
-    @items = Item.new
+   @item = Item.new
   end
 
   def create
+    @item = Item.create(item_params)
+    if @item.save
+      redirect_to root_path
+    else
+      render :new
+    end
+  end
+
+  private
+
+  def item_params
+    params.require(:item).permit(:image, :list, :detail, :situation_id, :category_id, :shipping_charge_id, :prefecture_id, :days_to_ship_id, :selling_price)
   end
 end
 

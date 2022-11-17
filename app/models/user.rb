@@ -13,6 +13,9 @@ class User < ApplicationRecord
     validates :birth_day
   end
 
+  has_many :items
+  # has_many :purchase_records
+
   with_options allow_blank:true do
     with_options format: { with: /\A[ぁ-んァ-ヶ一-龥々ー]+\z/ } do
       validates :last_name
@@ -29,8 +32,5 @@ class User < ApplicationRecord
 
 
 
-  
 
 
-   has_many :items
-  # has_many :purchase_records

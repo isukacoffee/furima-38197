@@ -21,6 +21,7 @@ class Item < ApplicationRecord
   belongs_to_active_hash :prefecture
   belongs_to_active_hash :days_to_ship
   belongs_to :user
+  has_many :items
   # has_one :purchase_record
   has_one_attached :image
   validates :image, presence: true, unless: :was_attached?

@@ -8,7 +8,6 @@ FactoryBot.define do
     days_to_ship_id         {2}
     selling_price           {350}
     situation_id            {2}
-    image                   {Faker::Lorem.sentence}
     association :user
 
     after(:build) do |item|

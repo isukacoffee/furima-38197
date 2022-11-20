@@ -129,6 +129,11 @@
     <ul class='item-lists'>
       
 
+
+      <% if @items.present? %>
+        <% @items.each do |item| %>
+        <li class='list'>
+          <%= link_to item_path(item.id)  do %>
       
       <% if @items.present? %>
         <% @items.each do |item| %>
@@ -139,9 +144,9 @@
 
 
              <%# 商品が売れていればsold outを表示しましょう %>
-            <div class='sold-out'>
-              <span>Sold Out!!</span>
-            </div>
+            <%# <div class='sold-out'> %>
+              <%# <span>Sold Out!!</span> %>
+            <%# </div> %>
             <%# //商品が売れていればsold outを表示しましょう %>
 
           </div>
@@ -162,7 +167,6 @@
       <% end %>
      
 
-    
       <% else %>
 
       <li class='list'>

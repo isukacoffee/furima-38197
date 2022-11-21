@@ -11,7 +11,7 @@ class ItemsController < ApplicationController
   def create
     @item = Item.create(item_params)
     if @item.save
-      redirect_to root_path
+       redirect_to root_path
     else
       render :new
     end
@@ -22,8 +22,19 @@ class ItemsController < ApplicationController
   end
   
   def edit
-    @Item = Item.find(params[:id])
+    @item = Item.find(params[:id])
   end
+
+  def update
+    @item = Item.find(params[:id])
+    if @item.update(item_params)
+       redirect_to root_path
+    else
+      #updateを失敗すると編集ページへ
+      render :edit
+    end
+  end
+
 
 
   private

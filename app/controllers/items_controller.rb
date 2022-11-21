@@ -32,7 +32,6 @@ class ItemsController < ApplicationController
     if @item.update(item_params)
        redirect_to item_path
     else
-      #updateを失敗すると編集ページへ
       render :edit
     end
   end

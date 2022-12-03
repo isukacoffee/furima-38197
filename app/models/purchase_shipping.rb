@@ -15,6 +15,6 @@ class PurchaseShipping
   def save
      purchase_shipping = PurchaseShipping.create(user_id: user_id, item_id: item_id) 
     # 配送先テーブル名
-     Shipping.create(post_code: post_code, prefecture_id: prefecture_id, municipality: municipality, address: address, building: building, phone_number: phone_number, purchase_shipping_id: purchase_shipping_id)
+     Shipping.create(post_code: post_code, prefecture_id: prefecture_id, municipality: municipality, address: address, building: building, phone_number: phone_number, purchase_shipping_id: purchase_shipping_id, user_id: @user_id , item_id: @item_id)
   end
 end

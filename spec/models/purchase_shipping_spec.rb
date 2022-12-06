@@ -55,6 +55,11 @@ RSpec.describe PurchaseShipping, type: :model do
         @purchase_shipping.valid?
         expect(@purchase_shipping.errors.full_messages).to include("Phone number is invalid. Input only number")
       end
+      it "tokenが空では登録できないこと" do
+        @purchase_shipping.token = nil
+        @purchase_shipping.valid?
+        expect(@purchase_shipping.errors.full_messages).to include("Token can't be blank")
+      end
       it 'userが紐付いていないと保存できないこと' do
         @purchase_shipping.user_id = nil
         @purchase_shipping.valid?

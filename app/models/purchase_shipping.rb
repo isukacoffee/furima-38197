@@ -3,6 +3,7 @@ class PurchaseShipping
   attr_accessor :post_code, :prefecture_id, :municipality, :address, :building, :phone_number, :user_id, :item_id, :token
 
   with_options presence: true do
+    validates :token
     validates :user_id
     validates :item_id
     validates :municipality
@@ -13,8 +14,9 @@ class PurchaseShipping
   end
   
   def save
-     purchase_shipping = PurchaseShipping.create(user_id: user_id, item_id: item_id) 
-    # 配送先テーブル名
-     Shipping.create(post_code: post_code, prefecture_id: prefecture_id, municipality: municipality, address: address, building: building, phone_number: phone_number, purchase_shipping_id: purchase_shipping_id, user_id: @user_id , item_id: @item_id)
+    # 購入情報テーブル名（外部キー）
+     purchase_records = PurchaseRecord.create(user_id: user_id, item_id: item_id) 
+    # 配送先テーブル名（配送先テーブル名の中のカラム名）
+     Shipping.create(post_code: post_code, prefecture_id: prefecture_id, municipality: municipality, address: address, building: building, phone_number: phone_number)
   end
 end

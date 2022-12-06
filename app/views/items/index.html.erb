@@ -138,9 +138,12 @@
 
 
              <%# 商品が売れていればsold outを表示しましょう %>
-            <%# <div class='sold-out'> %>
-              <%# <span>Sold Out!!</span> %>
-            <%# </div> %>
+             <%# 商品購入テーブルに商品情報があるかの分岐 %>
+           <% if item.purchase_record %>
+             <div class='sold-out'>
+               <span>Sold Out!!</span> 
+             </div> 
+            <% end %>
             <%# //商品が売れていればsold outを表示しましょう %>
 
           </div>

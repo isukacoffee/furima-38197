@@ -55,6 +55,21 @@ RSpec.describe PurchaseShipping, type: :model do
         @purchase_shipping.valid?
         expect(@purchase_shipping.errors.full_messages).to include("Phone number is invalid. Input only number")
       end
+      it 'phone_numberは9桁以下では購入できない' do
+        @purchase_shipping.phone_number = "11111111"
+        @purchase_shipping.valid?
+        expect(@purchase_shipping.errors.full_messages).to include("Phone number is invalid. Input only number")
+      end
+      it 'phone_numberは12桁以上では購入でいきない' do
+        @purchase_shipping.phone_number = "1111111111111111"
+        @purchase_shipping.valid?
+        expect(@purchase_shipping.errors.full_messages).to include("Phone number is invalid. Input only number")
+      end
+      it 'phone_numberは半角数字以外が含まれている場合は購入できない' do
+        @purchase_shipping.phone_number = "１１１１１"
+        @purchase_shipping.valid?
+        expect(@purchase_shipping.errors.full_messages).to include("Phone number is invalid. Input only number")
+      end
       it "tokenが空では登録できないこと" do
         @purchase_shipping.token = nil
         @purchase_shipping.valid?
@@ -64,6 +79,11 @@ RSpec.describe PurchaseShipping, type: :model do
         @purchase_shipping.user_id = nil
         @purchase_shipping.valid?
         expect(@purchase_shipping.errors.full_messages).to include("User can't be blank")
+      end
+      it 'itemが紐付いていないと保存できないこと' do
+        @purchase_shipping.item_id = nil
+        @purchase_shipping.valid?
+        expect(@purchase_shipping.errors.full_messages).to include("Item can't be blank")
       end
     end
   end

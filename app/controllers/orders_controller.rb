@@ -1,14 +1,19 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_item, only: [:index, :create]
+
 
   def index
-    @purchase_shipping = PurchaseShipping.new
-    @item = Item.find(params[:item_id])
+    # ログインしたユーザーと出品者が同じかどうかの分岐
+    if user_signed_in? && current_user.id != @item.user_id && @item.purchase_record == nil
+      @purchase_shipping = PurchaseShipping.new
+    else
+      redirect_to root_path
+    end
   end
 
 
   def create
-    @item = Item.find(params[:item_id])
     @purchase_shipping = PurchaseShipping.new(purchase_records_params)
     if @purchase_shipping.valid?
       pay_item
@@ -20,6 +25,10 @@ class OrdersController < ApplicationController
   end
 
   private
+
+  def set_item
+    @item = Item.find(params[:item_id])
+  end
 
   def purchase_records_params
     params.require(:purchase_shipping).permit(:post_code, :prefecture_id, :municipality, :address, :building, :phone_number).merge(user_id: current_user.id, item_id: params[:item_id], token: params[:token])

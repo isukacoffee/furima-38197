@@ -50,17 +50,15 @@ class ItemsController < ApplicationController
 
   private
 
-  # def purchase_shipping_params
-  #   params.require(:purchase_shipping).permit(:post_code, :prefecture, :municipality, :address, :building, :phone_number).merge(user_id: current_user.id)
-  # end
   
   def set_item
     @item = Item.find(params[:id])
   end
 
-    def item_params
+  def item_params
       params.require(:item).permit(:name, :image, :list, :detail, :situation_id, :category_id, :shipping_charge_id, :prefecture_id, :days_to_ship_id, :selling_price).merge(user_id: current_user.id)
-    end
+  end
+  
 
 end
 

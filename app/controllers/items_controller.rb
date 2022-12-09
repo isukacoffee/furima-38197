@@ -7,7 +7,7 @@ class ItemsController < ApplicationController
   end
 
   def new
-   @item = Item.new
+    @item = Item.new
   end
 
   def create
@@ -23,7 +23,8 @@ class ItemsController < ApplicationController
   end
   
   def edit
-    if @item.user_id != current_user.id
+    if @item.user_id == current_user.id && @item.purchase_record.nil?
+    else
       redirect_to root_path
     end
   end
@@ -40,7 +41,8 @@ class ItemsController < ApplicationController
   def destroy
     if @item.user_id == current_user.id
      @item.destroy
-      redirect_to root_path
+    #  削除後、メイン画面へ
+      redirect_to root_path 
      else
       redirect_to root_path
     end
@@ -49,14 +51,15 @@ class ItemsController < ApplicationController
 
   private
 
+  
   def set_item
     @item = Item.find(params[:id])
   end
 
   def item_params
-    params.require(:item).permit(:name, :image, :list, :detail, :situation_id, :category_id, :shipping_charge_id, :prefecture_id, :days_to_ship_id, :selling_price).merge(user_id: current_user.id)
-
+      params.require(:item).permit(:name, :image, :list, :detail, :situation_id, :category_id, :shipping_charge_id, :prefecture_id, :days_to_ship_id, :selling_price).merge(user_id: current_user.id)
   end
+  
 
 end
 

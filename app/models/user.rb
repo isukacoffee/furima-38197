@@ -14,7 +14,7 @@ class User < ApplicationRecord
   end
 
   has_many :items
-  # has_many :purchase_records
+  has_many :purchase_records
 
   with_options allow_blank:true do
     with_options format: { with: /\A[ぁ-んァ-ヶ一-龥々ー]+\z/ } do

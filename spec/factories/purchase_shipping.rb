@@ -4,7 +4,7 @@ FactoryBot.define do
     prefecture_id                  {2}
     municipality                   {'神戸市'}
     address                        {'1-1'}
-    building                       {''}
+    building                       {'神戸ハイツ'}
     phone_number                   {'12345678911'}
     token                          {"tok_abcdefghijk00000000000000000"}
   end

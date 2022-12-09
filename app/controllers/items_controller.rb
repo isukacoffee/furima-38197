@@ -23,10 +23,9 @@ class ItemsController < ApplicationController
   end
   
   def edit
-    if @item.user_id != current_user.id
+    if @item.user_id == current_user.id && @item.purchase_record.nil?
+    else
       redirect_to root_path
-    else 
-      render :index
     end
   end
 

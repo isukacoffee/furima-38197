@@ -15,8 +15,8 @@ class PurchaseShipping
   
   def save
     # 購入情報テーブル名（外部キー）
-     purchase_records = PurchaseRecord.create(user_id: user_id, item_id: item_id) 
+     purchase_record = PurchaseRecord.create(user_id: user_id, item_id: item_id) 
     # 配送先テーブル名（配送先テーブル名の中のカラム名）
-     Shipping.create(post_code: post_code, prefecture_id: prefecture_id, municipality: municipality, address: address, building: building, phone_number: phone_number)
+     Shipping.create(post_code: post_code, prefecture_id: prefecture_id, municipality: municipality, address: address, building: building, phone_number: phone_number, purchase_record_id: purchase_record.id)
   end
 end
